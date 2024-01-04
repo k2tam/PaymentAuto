@@ -27,6 +27,7 @@
 		0553B1BB2B46ADF50081840D /* AddressRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0553B1A82B46ADF50081840D /* AddressRow.swift */; };
 		0553B1BF2B46AE6E0081840D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0553B1BD2B46AE6E0081840D /* Extensions.swift */; };
 		0553B1C02B46AE6E0081840D /* VList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0553B1BE2B46AE6E0081840D /* VList.swift */; };
+		0553B1C32B46B1C50081840D /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 0553B1C22B46B1C50081840D /* SwiftyJSON */; };
 		055E35D92B4543A200FAC071 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055E35D82B4543A200FAC071 /* AppDelegate.swift */; };
 		055E35DB2B4543A200FAC071 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055E35DA2B4543A200FAC071 /* SceneDelegate.swift */; };
 		055E35DD2B4543A200FAC071 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055E35DC2B4543A200FAC071 /* ViewController.swift */; };
@@ -89,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0553B1C32B46B1C50081840D /* SwiftyJSON in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +324,9 @@
 			dependencies = (
 			);
 			name = PaymentAuto;
+			packageProductDependencies = (
+				0553B1C22B46B1C50081840D /* SwiftyJSON */,
+			);
 			productName = PaymentAuto;
 			productReference = 055E35D52B4543A200FAC071 /* PaymentAuto.app */;
 			productType = "com.apple.product-type.application";
@@ -350,6 +355,9 @@
 				Base,
 			);
 			mainGroup = 055E35CC2B4543A200FAC071;
+			packageReferences = (
+				0553B1C12B46B1C50081840D /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+			);
 			productRefGroup = 055E35D62B4543A200FAC071 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -627,6 +635,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		0553B1C12B46B1C50081840D /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		0553B1C22B46B1C50081840D /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0553B1C12B46B1C50081840D /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 055E35CD2B4543A200FAC071 /* Project object */;
 }
