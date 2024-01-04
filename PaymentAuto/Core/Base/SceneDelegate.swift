@@ -19,7 +19,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         
-        let rootVC = CancelAutomaticPayment()
+//        let rootVC = CancelAutomaticPayment()
+        let resultModel = ResultPayment(
+            resultModel: ResultModel(resultType: .fail, title: "Thanh toán thất bại", price: nil, desc: "Gặp sự cố trong quá trình thanh toán,\nQuý khách vui lòng thử thanh toán lại.\n Xin cảm ơn!"),
+            
+                addOnResultModel: AddOnResultModel(img: "ic_add_on_card", title: "Liên kết thẻ", desc: "Thanh toán tiện lợi,an toàn,miễn phí!")
+        )
+        
+        let rootVC = ResultVC(resultPayment: resultModel)
+//        let rootVC = PaymentAutoRegisterVC()
         
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = rootVC
