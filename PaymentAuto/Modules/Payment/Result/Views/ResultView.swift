@@ -52,27 +52,28 @@ class ResultView: UIView {
         return lb
     }()
     
-    public func configure(from resultModel: ResultModel) {
-        switch resultModel.resultType {
-        case .success:
-            imgVResultIcon.image = UIImage(resource: .icTick)
-        case .fail:
-            imgVResultIcon.image = UIImage(resource: .icRedClose)
-        }
-        
-        if let price = resultModel.price {
-            lbPrice.text = price
-        }else{
-            lbPrice.isHidden = true
-        }
-        
-        lbTitle.text = resultModel.title
-        lbDesc.text = resultModel.desc
-    }
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+   
+    
+    init(amountText: String, content: ContentCheckFreeVoucherModel,typeResult: PaymentResultStatus){
+        super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
+        
+        switch typeResult {
+        case .SUCCESS:
+            imgVResultIcon.image = UIImage(resource: .icTick)
+        case .SUCCESSAUTOPAY:
+            imgVResultIcon.image = UIImage(resource: .icTick)
+        case .FAILURE:
+            imgVResultIcon.image = UIImage(resource: .icRedClose)
+            lbPrice.isHidden = true
+        case .SUCCESS_WITHOUT_PAYMENTMETHOD:
+            imgVResultIcon.image = UIImage(resource: .icTick)
+        }
+        
+        lbPrice.text = amountText
+        lbTitle.text = content.title
+        lbDesc.text = content.body
+        
         self.setupUI()
     }
     
@@ -80,6 +81,11 @@ class ResultView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//    }
+    
+
     private func setupUI() {
         let arrangedSubViews = [imgVResultIcon,lbTitle,lbPrice,lbDesc]
       

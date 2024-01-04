@@ -28,6 +28,9 @@
 		0553B1BF2B46AE6E0081840D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0553B1BD2B46AE6E0081840D /* Extensions.swift */; };
 		0553B1C02B46AE6E0081840D /* VList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0553B1BE2B46AE6E0081840D /* VList.swift */; };
 		0553B1C32B46B1C50081840D /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 0553B1C22B46B1C50081840D /* SwiftyJSON */; };
+		0553B1C52B46B39D0081840D /* CheckFreeVoucherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0553B1C42B46B39D0081840D /* CheckFreeVoucherModel.swift */; };
+		0553B1C82B46BA160081840D /* ResultSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0553B1C72B46BA160081840D /* ResultSampleData.swift */; };
+		0553B1CA2B46BABC0081840D /* ResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0553B1C92B46BABC0081840D /* ResultManager.swift */; };
 		055E35D92B4543A200FAC071 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055E35D82B4543A200FAC071 /* AppDelegate.swift */; };
 		055E35DB2B4543A200FAC071 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055E35DA2B4543A200FAC071 /* SceneDelegate.swift */; };
 		055E35DD2B4543A200FAC071 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055E35DC2B4543A200FAC071 /* ViewController.swift */; };
@@ -66,6 +69,9 @@
 		0553B1A82B46ADF50081840D /* AddressRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressRow.swift; sourceTree = "<group>"; };
 		0553B1BD2B46AE6E0081840D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0553B1BE2B46AE6E0081840D /* VList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VList.swift; sourceTree = "<group>"; };
+		0553B1C42B46B39D0081840D /* CheckFreeVoucherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckFreeVoucherModel.swift; sourceTree = "<group>"; };
+		0553B1C72B46BA160081840D /* ResultSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSampleData.swift; sourceTree = "<group>"; };
+		0553B1C92B46BABC0081840D /* ResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultManager.swift; sourceTree = "<group>"; };
 		055E35D52B4543A200FAC071 /* PaymentAuto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaymentAuto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		055E35D82B4543A200FAC071 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		055E35DA2B4543A200FAC071 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +106,8 @@
 		0553B18F2B46ADF50081840D /* Result */ = {
 			isa = PBXGroup;
 			children = (
+				0553B1C92B46BABC0081840D /* ResultManager.swift */,
+				0553B1C62B46BA020081840D /* SampleData */,
 				0553B1902B46ADF50081840D /* ResultVM.swift */,
 				0553B1912B46ADF50081840D /* Models */,
 				0553B1932B46ADF50081840D /* ResultVC.swift */,
@@ -111,6 +119,7 @@
 		0553B1912B46ADF50081840D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				0553B1C42B46B39D0081840D /* CheckFreeVoucherModel.swift */,
 				0553B1922B46ADF50081840D /* ResultPayment.swift */,
 			);
 			path = Models;
@@ -190,6 +199,14 @@
 				0553B1BE2B46AE6E0081840D /* VList.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0553B1C62B46BA020081840D /* SampleData */ = {
+			isa = PBXGroup;
+			children = (
+				0553B1C72B46BA160081840D /* ResultSampleData.swift */,
+			);
+			path = SampleData;
 			sourceTree = "<group>";
 		};
 		055E35CC2B4543A200FAC071 = {
@@ -391,6 +408,7 @@
 				0553B1C02B46AE6E0081840D /* VList.swift in Sources */,
 				0553B1B62B46ADF50081840D /* ContractTblCell.swift in Sources */,
 				0553B1AC2B46ADF50081840D /* ResultVC.swift in Sources */,
+				0553B1C82B46BA160081840D /* ResultSampleData.swift in Sources */,
 				055E35DD2B4543A200FAC071 /* ViewController.swift in Sources */,
 				992813932B4698F800F578F6 /* Extension+UIView.swift in Sources */,
 				0553B1BA2B46ADF50081840D /* ContractRow.swift in Sources */,
@@ -399,7 +417,9 @@
 				0553B1B82B46ADF50081840D /* PaymentAutoRegisterVM.swift in Sources */,
 				993A2A572B45471300B0C8D8 /* CancelAutomaticPayment.swift in Sources */,
 				0553B1AF2B46ADF50081840D /* BlockTitleRow.swift in Sources */,
+				0553B1C52B46B39D0081840D /* CheckFreeVoucherModel.swift in Sources */,
 				0553B1B52B46ADF50081840D /* PaymentAutoRegisterVC.swift in Sources */,
+				0553B1CA2B46BABC0081840D /* ResultManager.swift in Sources */,
 				992813852B4695FB00F578F6 /* BaseControllerWithHeaderVC.swift in Sources */,
 				993A2A5A2B4550D300B0C8D8 /* ItemPaymentMethodCell.swift in Sources */,
 				9928138B2B46972500F578F6 /* ButtonPrimary.swift in Sources */,

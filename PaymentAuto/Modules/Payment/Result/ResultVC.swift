@@ -11,23 +11,29 @@ class ResultVC: UIViewController {
     private let tblViewResult =  UITableView()
     
     lazy var scrollView : VList = VList(scrollviewContentInset: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16),
-                                           containerContentInset: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+                                        containerContentInset: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
     private var vm: ResultVM?
     
-    private let resultView = ResultView()
+    private let resultView: ResultView
     private let resultAddOnView = ResultAddOnView {
         print("Press")
     }
     
-    
-    init(resultPayment: ResultPayment){
+    init(modelPayment: CheckFreeVoucherModel, typeResult: PaymentResultStatus = .SUCCESS_WITHOUT_PAYMENTMETHOD){
+        
+        self.resultView = ResultView(
+            amountText: modelPayment.amountText,
+            content: modelPayment.content,
+            typeResult: typeResult
+        )
+        
+        
+        
         super.init(nibName: nil, bundle: nil)
-        configure(from: resultPayment)
-        vm = ResultVM(resultPayment: resultPayment)
+        
     }
     
     private func configure(from resultPayment: ResultPayment){
-        resultView.configure(from: resultPayment.resultModel)
         
         //If have add on then show if not hide
         if let addOnResultModel =  resultPayment.addOnResultModel{
@@ -36,7 +42,6 @@ class ResultVC: UIViewController {
         }else {
             resultAddOnView.isHidden = true
         }
-        
     }
     
     required init?(coder: NSCoder) {
@@ -53,7 +58,6 @@ class ResultVC: UIViewController {
     
     
     private func setupUI() {
-//        view.addSubViews(resultView, resultAddOnView)
         view.addSubview(scrollView)
         scrollView.vStack.spacing = 16
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -61,14 +65,10 @@ class ResultVC: UIViewController {
         
         
         NSLayoutConstraint.activate([
-
-            
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            
             
         ])
         
