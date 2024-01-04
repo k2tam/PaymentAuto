@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         
-        let rootVC = ViewController()
+        let rootVC = CancelAutomaticPayment()
         
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = rootVC

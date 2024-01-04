@@ -50,7 +50,7 @@ class BaseControllerWithHeaderVC: BaseViewController {
         headerHeight = self.view.bounds.width*WIDTH_HEIGHT_RATIO
         setConstraintHeader()
         self.additionalSafeAreaInsets = UIEdgeInsets(top: headerHeight, left: 0, bottom: 0, right: 0)
-        self.backgroundHeader.backgroundColor = MyGlobal.shared().myThemes.getHeaderBackgroundColor()
+        self.backgroundHeader.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
         self.headerView.backgroundColor = .clear
     }
 }

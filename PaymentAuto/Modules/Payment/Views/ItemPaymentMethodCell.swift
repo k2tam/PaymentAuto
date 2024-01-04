@@ -62,8 +62,11 @@ class ItemPaymentMethodCell: UITableViewCell {
     func setImgae(isCheck: Bool){
         if isCheck == true{
             image.image = UIImage(named: "tickblu")
+            vBackground.layer.borderColor = UIColor(hex: "#4564ED")?.cgColor
+            vBackground.layer.borderWidth = 1
         }else{
             image.image = UIImage(named: "tickgay")
+            vBackground.layer.borderColor = UIColor.white.cgColor       
         }
     }
     func config(titles: String){

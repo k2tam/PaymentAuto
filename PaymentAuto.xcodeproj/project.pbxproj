@@ -12,6 +12,16 @@
 		055E35DD2B4543A200FAC071 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055E35DC2B4543A200FAC071 /* ViewController.swift */; };
 		055E35E22B4543A300FAC071 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 055E35E12B4543A300FAC071 /* Assets.xcassets */; };
 		055E35E52B4543A300FAC071 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 055E35E32B4543A300FAC071 /* LaunchScreen.storyboard */; };
+		992813822B4659AB00F578F6 /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992813812B4659AA00F578F6 /* HeaderCell.swift */; };
+		992813852B4695FB00F578F6 /* BaseControllerWithHeaderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992813842B4695FB00F578F6 /* BaseControllerWithHeaderVC.swift */; };
+		992813872B46963400F578F6 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992813862B46963400F578F6 /* BaseViewController.swift */; };
+		992813892B4696DB00F578F6 /* HiHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992813882B4696DB00F578F6 /* HiHeaderView.swift */; };
+		9928138B2B46972500F578F6 /* ButtonPrimary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9928138A2B46972500F578F6 /* ButtonPrimary.swift */; };
+		9928138D2B46978B00F578F6 /* ThemesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9928138C2B46978B00F578F6 /* ThemesManager.swift */; };
+		992813932B4698F800F578F6 /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992813922B4698F800F578F6 /* Extension+UIView.swift */; };
+		992813972B46A3CF00F578F6 /* HiBottomViewWithTwoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992813962B46A3CF00F578F6 /* HiBottomViewWithTwoButton.swift */; };
+		993A2A572B45471300B0C8D8 /* CancelAutomaticPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993A2A562B45471300B0C8D8 /* CancelAutomaticPayment.swift */; };
+		993A2A5A2B4550D300B0C8D8 /* ItemPaymentMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993A2A592B4550D300B0C8D8 /* ItemPaymentMethodCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +32,16 @@
 		055E35E12B4543A300FAC071 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		055E35E42B4543A300FAC071 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		055E35E62B4543A300FAC071 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		992813812B4659AA00F578F6 /* HeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
+		992813842B4695FB00F578F6 /* BaseControllerWithHeaderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseControllerWithHeaderVC.swift; sourceTree = "<group>"; };
+		992813862B46963400F578F6 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		992813882B4696DB00F578F6 /* HiHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiHeaderView.swift; sourceTree = "<group>"; };
+		9928138A2B46972500F578F6 /* ButtonPrimary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonPrimary.swift; sourceTree = "<group>"; };
+		9928138C2B46978B00F578F6 /* ThemesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesManager.swift; sourceTree = "<group>"; };
+		992813922B4698F800F578F6 /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
+		992813962B46A3CF00F578F6 /* HiBottomViewWithTwoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiBottomViewWithTwoButton.swift; sourceTree = "<group>"; };
+		993A2A562B45471300B0C8D8 /* CancelAutomaticPayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelAutomaticPayment.swift; sourceTree = "<group>"; };
+		993A2A592B4550D300B0C8D8 /* ItemPaymentMethodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPaymentMethodCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,9 +83,25 @@
 			path = PaymentAuto;
 			sourceTree = "<group>";
 		};
+		992813832B46931900F578F6 /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
+		992813912B4698C700F578F6 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				992813922B4698F800F578F6 /* Extension+UIView.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		993A2A4B2B45453400B0C8D8 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				992813912B4698C700F578F6 /* Common */,
 				993A2A4E2B45456300B0C8D8 /* Base */,
 			);
 			path = Core;
@@ -74,6 +110,7 @@
 		993A2A4C2B45453900B0C8D8 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				993A2A502B45467500B0C8D8 /* Payment */,
 				993A2A4F2B45457D00B0C8D8 /* Home */,
 			);
 			path = Modules;
@@ -92,6 +129,12 @@
 			children = (
 				055E35D82B4543A200FAC071 /* AppDelegate.swift */,
 				055E35DA2B4543A200FAC071 /* SceneDelegate.swift */,
+				992813842B4695FB00F578F6 /* BaseControllerWithHeaderVC.swift */,
+				992813862B46963400F578F6 /* BaseViewController.swift */,
+				992813882B4696DB00F578F6 /* HiHeaderView.swift */,
+				9928138A2B46972500F578F6 /* ButtonPrimary.swift */,
+				9928138C2B46978B00F578F6 /* ThemesManager.swift */,
+				992813962B46A3CF00F578F6 /* HiBottomViewWithTwoButton.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -102,6 +145,57 @@
 				055E35DC2B4543A200FAC071 /* ViewController.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		993A2A502B45467500B0C8D8 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				993A2A552B4546FA00B0C8D8 /* Manager */,
+				993A2A542B4546E500B0C8D8 /* ViewModels */,
+				993A2A532B4546DE00B0C8D8 /* Views */,
+				993A2A522B4546D100B0C8D8 /* Models */,
+				993A2A512B4546C500B0C8D8 /* Controllers */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		993A2A512B4546C500B0C8D8 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				993A2A562B45471300B0C8D8 /* CancelAutomaticPayment.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		993A2A522B4546D100B0C8D8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		993A2A532B4546DE00B0C8D8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				992813832B46931900F578F6 /* Popup */,
+				993A2A592B4550D300B0C8D8 /* ItemPaymentMethodCell.swift */,
+				992813812B4659AA00F578F6 /* HeaderCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		993A2A542B4546E500B0C8D8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		993A2A552B4546FA00B0C8D8 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,8 +268,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9928138D2B46978B00F578F6 /* ThemesManager.swift in Sources */,
 				055E35DD2B4543A200FAC071 /* ViewController.swift in Sources */,
+				992813932B4698F800F578F6 /* Extension+UIView.swift in Sources */,
+				992813972B46A3CF00F578F6 /* HiBottomViewWithTwoButton.swift in Sources */,
+				993A2A572B45471300B0C8D8 /* CancelAutomaticPayment.swift in Sources */,
+				992813852B4695FB00F578F6 /* BaseControllerWithHeaderVC.swift in Sources */,
+				993A2A5A2B4550D300B0C8D8 /* ItemPaymentMethodCell.swift in Sources */,
+				9928138B2B46972500F578F6 /* ButtonPrimary.swift in Sources */,
+				992813892B4696DB00F578F6 /* HiHeaderView.swift in Sources */,
 				055E35D92B4543A200FAC071 /* AppDelegate.swift in Sources */,
+				992813872B46963400F578F6 /* BaseViewController.swift in Sources */,
+				992813822B4659AB00F578F6 /* HeaderCell.swift in Sources */,
 				055E35DB2B4543A200FAC071 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
