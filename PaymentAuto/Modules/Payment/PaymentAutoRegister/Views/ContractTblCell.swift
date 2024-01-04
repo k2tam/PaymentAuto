@@ -19,12 +19,19 @@ class ContractTblCell: UITableViewCell {
         return view
     }()
     
+    
+    private let stackContractBlock: UIStackView = {
+       let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        stack.spacing = 16
+        return stack
+    }()
+    
     private let contractTitleRow = BlockTitleRow(icon: "ic_contract", title: "Thông tin hợp đồng")
     private let contractTitleDivider = DividerLine()
     
-    private let contractRow = ContractRow()
-    private let presenterRow = PresenterRow()
-    private let addressRow = AddressRow()
+
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -33,20 +40,36 @@ class ContractTblCell: UITableViewCell {
     }
     
     public func configure(from contract: Contract){
-        setupUI()
-        contractRow.configureContent(content: contract.contactNo)
-        presenterRow.configureContent(content: contract.presenterName)
-        addressRow.configureContent(content: contract.address)
+        setupUI(contract: contract)
+        
+        let contractContentRows: [BlockContentRow] = [
+            BlockContentRow(title: "Số hợp đồng", body: contract.contactNo),
+            BlockContentRow(title: "Người đại diện", body: contract.presenterName),
+            BlockContentRow(title: "Địa chỉ lắp đặt", body: contract.address),
+        ]
+        
+        for (index,item) in contractContentRows.enumerated() {
+            stackContractBlock.addArrangedSubview(item)
+            
+            if index != contractContentRows.count - 1{
+                let dividerLine = DividerLine()
+                dividerLine.translatesAutoresizingMaskIntoConstraints = false
+                stackContractBlock.addArrangedSubview(dividerLine)
+            }
+          
+        }
+        
+
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI(){
+    private func setupUI(contract: Contract){
         addSubViews(cellContentView)
-        cellContentView.addSubViews(contractTitleRow,contractTitleDivider,contractRow,presenterRow,addressRow)
-        
+        cellContentView.addSubViews(contractTitleRow,contractTitleDivider,stackContractBlock)
+
         
         NSLayoutConstraint.activate([
             cellContentView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
@@ -63,19 +86,15 @@ class ContractTblCell: UITableViewCell {
             contractTitleDivider.leadingAnchor.constraint(equalTo: cellContentView.leadingAnchor, constant: 16),
             contractTitleDivider.trailingAnchor.constraint(equalTo: cellContentView.trailingAnchor, constant: -16),
             
-            contractRow.topAnchor.constraint(equalTo: contractTitleDivider.bottomAnchor, constant: 16),
-            contractRow.leadingAnchor.constraint(equalTo: cellContentView.leadingAnchor, constant: 16),
-            contractRow.trailingAnchor.constraint(equalTo: cellContentView.trailingAnchor, constant: -16),
+            stackContractBlock.topAnchor.constraint(equalTo: contractTitleDivider.bottomAnchor, constant: 16),
+            stackContractBlock.leadingAnchor.constraint(equalTo: cellContentView.leadingAnchor, constant: 16),
+            stackContractBlock.trailingAnchor.constraint(equalTo: cellContentView.trailingAnchor, constant: -16),
+            stackContractBlock.bottomAnchor.constraint(equalTo: cellContentView.bottomAnchor, constant: -16),
             
-            presenterRow.topAnchor.constraint(equalTo: contractRow.bottomAnchor, constant: 16),
-            presenterRow.leadingAnchor.constraint(equalTo: cellContentView.leadingAnchor, constant: 16),
-            presenterRow.trailingAnchor.constraint(equalTo: cellContentView.trailingAnchor, constant: -16),
-            
-            addressRow.topAnchor.constraint(equalTo: presenterRow.bottomAnchor, constant: 16),
-            addressRow.leadingAnchor.constraint(equalTo: cellContentView.leadingAnchor, constant: 16),
-            addressRow.trailingAnchor.constraint(equalTo: cellContentView.trailingAnchor, constant: -16),
-            addressRow.bottomAnchor.constraint(equalTo: cellContentView.bottomAnchor, constant: -16),
+
 
         ])
+        
+       
     }
 }

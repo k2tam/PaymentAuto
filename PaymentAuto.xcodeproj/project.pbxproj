@@ -22,15 +22,13 @@
 		0553B1B62B46ADF50081840D /* ContractTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0553B1A22B46ADF50081840D /* ContractTblCell.swift */; };
 		0553B1B72B46ADF50081840D /* AutoPaymentMethodTblCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0553B1A32B46ADF50081840D /* AutoPaymentMethodTblCell.swift */; };
 		0553B1B82B46ADF50081840D /* PaymentAutoRegisterVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0553B1A42B46ADF50081840D /* PaymentAutoRegisterVM.swift */; };
-		0553B1B92B46ADF50081840D /* PresenterRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0553B1A62B46ADF50081840D /* PresenterRow.swift */; };
-		0553B1BA2B46ADF50081840D /* ContractRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0553B1A72B46ADF50081840D /* ContractRow.swift */; };
-		0553B1BB2B46ADF50081840D /* AddressRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0553B1A82B46ADF50081840D /* AddressRow.swift */; };
 		0553B1BF2B46AE6E0081840D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0553B1BD2B46AE6E0081840D /* Extensions.swift */; };
 		0553B1C02B46AE6E0081840D /* VList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0553B1BE2B46AE6E0081840D /* VList.swift */; };
 		0553B1C32B46B1C50081840D /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 0553B1C22B46B1C50081840D /* SwiftyJSON */; };
 		0553B1C52B46B39D0081840D /* CheckFreeVoucherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0553B1C42B46B39D0081840D /* CheckFreeVoucherModel.swift */; };
 		0553B1C82B46BA160081840D /* ResultSampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0553B1C72B46BA160081840D /* ResultSampleData.swift */; };
 		0553B1CA2B46BABC0081840D /* ResultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0553B1C92B46BABC0081840D /* ResultManager.swift */; };
+		0553B1D32B46F7B00081840D /* BlockContentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0553B1D22B46F7B00081840D /* BlockContentRow.swift */; };
 		055E35D92B4543A200FAC071 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055E35D82B4543A200FAC071 /* AppDelegate.swift */; };
 		055E35DB2B4543A200FAC071 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055E35DA2B4543A200FAC071 /* SceneDelegate.swift */; };
 		055E35DD2B4543A200FAC071 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055E35DC2B4543A200FAC071 /* ViewController.swift */; };
@@ -64,14 +62,12 @@
 		0553B1A22B46ADF50081840D /* ContractTblCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContractTblCell.swift; sourceTree = "<group>"; };
 		0553B1A32B46ADF50081840D /* AutoPaymentMethodTblCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoPaymentMethodTblCell.swift; sourceTree = "<group>"; };
 		0553B1A42B46ADF50081840D /* PaymentAutoRegisterVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentAutoRegisterVM.swift; sourceTree = "<group>"; };
-		0553B1A62B46ADF50081840D /* PresenterRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenterRow.swift; sourceTree = "<group>"; };
-		0553B1A72B46ADF50081840D /* ContractRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContractRow.swift; sourceTree = "<group>"; };
-		0553B1A82B46ADF50081840D /* AddressRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressRow.swift; sourceTree = "<group>"; };
 		0553B1BD2B46AE6E0081840D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		0553B1BE2B46AE6E0081840D /* VList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VList.swift; sourceTree = "<group>"; };
 		0553B1C42B46B39D0081840D /* CheckFreeVoucherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckFreeVoucherModel.swift; sourceTree = "<group>"; };
 		0553B1C72B46BA160081840D /* ResultSampleData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultSampleData.swift; sourceTree = "<group>"; };
 		0553B1C92B46BABC0081840D /* ResultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultManager.swift; sourceTree = "<group>"; };
+		0553B1D22B46F7B00081840D /* BlockContentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockContentRow.swift; sourceTree = "<group>"; };
 		055E35D52B4543A200FAC071 /* PaymentAuto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PaymentAuto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		055E35D82B4543A200FAC071 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		055E35DA2B4543A200FAC071 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -138,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				0553B1982B46ADF50081840D /* BlockTitleRow.swift */,
+				0553B1D22B46F7B00081840D /* BlockContentRow.swift */,
 				0553B1992B46ADF50081840D /* DividerLine.swift */,
 			);
 			path = Components;
@@ -166,30 +163,10 @@
 			isa = PBXGroup;
 			children = (
 				0553B1A12B46ADF50081840D /* PaymentAutoRegisterVC.swift */,
-				0553B1A22B46ADF50081840D /* ContractTblCell.swift */,
-				0553B1A32B46ADF50081840D /* AutoPaymentMethodTblCell.swift */,
 				0553B1A42B46ADF50081840D /* PaymentAutoRegisterVM.swift */,
-				0553B1A52B46ADF50081840D /* ContractTblCellViews */,
-				0553B1A92B46ADF50081840D /* Views */,
+				0553B1D12B46F5050081840D /* Views */,
 			);
 			path = PaymentAutoRegister;
-			sourceTree = "<group>";
-		};
-		0553B1A52B46ADF50081840D /* ContractTblCellViews */ = {
-			isa = PBXGroup;
-			children = (
-				0553B1A62B46ADF50081840D /* PresenterRow.swift */,
-				0553B1A72B46ADF50081840D /* ContractRow.swift */,
-				0553B1A82B46ADF50081840D /* AddressRow.swift */,
-			);
-			path = ContractTblCellViews;
-			sourceTree = "<group>";
-		};
-		0553B1A92B46ADF50081840D /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		0553B1BC2B46AE6E0081840D /* Extensions */ = {
@@ -207,6 +184,15 @@
 				0553B1C72B46BA160081840D /* ResultSampleData.swift */,
 			);
 			path = SampleData;
+			sourceTree = "<group>";
+		};
+		0553B1D12B46F5050081840D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0553B1A22B46ADF50081840D /* ContractTblCell.swift */,
+				0553B1A32B46ADF50081840D /* AutoPaymentMethodTblCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		055E35CC2B4543A200FAC071 = {
@@ -298,8 +284,8 @@
 		993A2A502B45467500B0C8D8 /* Payment */ = {
 			isa = PBXGroup;
 			children = (
-				0553B19A2B46ADF50081840D /* AutoPaymentHomeVC */,
 				0553B1972B46ADF50081840D /* Components */,
+				0553B19A2B46ADF50081840D /* AutoPaymentHomeVC */,
 				0553B1A02B46ADF50081840D /* PaymentAutoRegister */,
 				0553B18F2B46ADF50081840D /* Result */,
 				993A2A532B4546DE00B0C8D8 /* Views */,
@@ -403,7 +389,6 @@
 			files = (
 				0553B1B22B46ADF50081840D /* AutoPaymentVC.swift in Sources */,
 				0553B1B72B46ADF50081840D /* AutoPaymentMethodTblCell.swift in Sources */,
-				0553B1B92B46ADF50081840D /* PresenterRow.swift in Sources */,
 				9928138D2B46978B00F578F6 /* ThemesManager.swift in Sources */,
 				0553B1C02B46AE6E0081840D /* VList.swift in Sources */,
 				0553B1B62B46ADF50081840D /* ContractTblCell.swift in Sources */,
@@ -411,7 +396,7 @@
 				0553B1C82B46BA160081840D /* ResultSampleData.swift in Sources */,
 				055E35DD2B4543A200FAC071 /* ViewController.swift in Sources */,
 				992813932B4698F800F578F6 /* Extension+UIView.swift in Sources */,
-				0553B1BA2B46ADF50081840D /* ContractRow.swift in Sources */,
+				0553B1D32B46F7B00081840D /* BlockContentRow.swift in Sources */,
 				0553B1AA2B46ADF50081840D /* ResultVM.swift in Sources */,
 				992813972B46A3CF00F578F6 /* HiBottomViewWithTwoButton.swift in Sources */,
 				0553B1B82B46ADF50081840D /* PaymentAutoRegisterVM.swift in Sources */,
@@ -423,7 +408,6 @@
 				992813852B4695FB00F578F6 /* BaseControllerWithHeaderVC.swift in Sources */,
 				993A2A5A2B4550D300B0C8D8 /* ItemPaymentMethodCell.swift in Sources */,
 				9928138B2B46972500F578F6 /* ButtonPrimary.swift in Sources */,
-				0553B1BB2B46ADF50081840D /* AddressRow.swift in Sources */,
 				0553B1B02B46ADF50081840D /* DividerLine.swift in Sources */,
 				0553B1B12B46ADF50081840D /* AutoPaymentVM.swift in Sources */,
 				992813892B4696DB00F578F6 /* HiHeaderView.swift in Sources */,

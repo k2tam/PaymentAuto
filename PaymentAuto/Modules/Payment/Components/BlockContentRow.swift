@@ -1,5 +1,5 @@
 //
-//  PresenterRow.swift
+//  BlockContentRow.swift
 //  PaymentAuto
 //
 //  Created by k2 tam on 04/01/2024.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PresenterRow: UIView {
+class BlockContentRow: UIView {
     private let lbTitle: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
@@ -27,29 +27,21 @@ class PresenterRow: UIView {
 
         return lb
     }()
-    
-    private let dividerLine = DividerLine()
-
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+   
+    init(title: String, body: String) {
+        super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
+        lbTitle.text = title
+        lbContent.text = body
         setupUI()
-
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    public func configureContent(content: String) {
-        lbContent.text = content
-    }
-   
-    
     private func setupUI() {
-        self.addSubViews(lbTitle,lbContent,dividerLine)
+        self.addSubViews(lbTitle,lbContent)
         
         lbContent.setContentHuggingPriority(.defaultHigh, for: .vertical)
 
@@ -59,18 +51,15 @@ class PresenterRow: UIView {
             lbTitle.topAnchor.constraint(equalTo: self.topAnchor),
             lbTitle.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             lbTitle.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            lbTitle.bottomAnchor.constraint(equalTo: lbContent.topAnchor, constant: 4),
+            lbTitle.bottomAnchor.constraint(equalTo: lbContent.topAnchor, constant: -4),
             
             lbContent.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             lbContent.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            
-            dividerLine.topAnchor.constraint(equalTo: lbContent.bottomAnchor, constant: 16),
-            dividerLine.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            dividerLine.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            dividerLine.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            lbContent.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+       
         ])
         
 
     }
-    
+
 }
