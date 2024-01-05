@@ -15,6 +15,7 @@ class AutoPayContractAndMethodTblV: UIView {
     
     private var contractModel: Contract
     private var tblItems: [eTblItems] = []
+    private var indexPathPayMethodCell : IndexPath? = nil
 
     private var tblView: UITableView = {
         let tblView = UITableView()
@@ -36,9 +37,13 @@ class AutoPayContractAndMethodTblV: UIView {
     }
     
     
+    //MARK: - Function for updating selected payment method
     public func setDataAutoPayDetailModel(autoPayDetailModel: AutopayDetailModel){
         self.tblItems = [.contractInfo(self.contractModel),.payment(autoPayDetailModel)]
-        self.tblView.reloadData()
+        if let indexPathPayMethodCell = indexPathPayMethodCell {
+            tblView.reloadRows(at: [indexPathPayMethodCell], with: .automatic)
+        }
+    
     }
     
     required init?(coder: NSCoder) {
@@ -64,7 +69,7 @@ class AutoPayContractAndMethodTblV: UIView {
     }
     
     func toggleSelectMethodSheet() {
-        print("Select method sheet on")
+        setDataAutoPayDetailModel(autoPayDetailModel: SampleData.sampleAutoPayModel)
     }
     
 }
@@ -86,6 +91,7 @@ extension AutoPayContractAndMethodTblV: UITableViewDataSource, UITableViewDelega
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AutoPaymentMethodTblCell.cellId, for: indexPath) as? AutoPaymentMethodTblCell else {
                 return UITableViewCell()
             }
+            self.indexPathPayMethodCell = indexPath
             cell.configure(from: autoPaymentModel)
             cell.didTapSelectMethod = toggleSelectMethodSheet
             

@@ -11,24 +11,23 @@ class AutoPayRegisterVC: BaseControllerWithHeaderVC {
     private var vm = PaymentAutoRegisterVM()
     
     private let autoPayDetailTblV: AutoPayContractAndMethodTblV
+    var indexPathOfPayMethodCell: IndexPath? = nil
+    
+    private let vFooter: HiBottomViewWithTwoButton = {
+        let v = HiBottomViewWithTwoButton()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        return v
+    }()
 
     override func setupHeader(){
         super.setupHeader()
-        headerView.lblTitle.text = "Trả tự động"
+        headerView.lblTitle.text = "Đăng ký trả tự động"
         headerView.lblTitle.textColor = UIColor(hex: "#333333")
         headerView.lblTitle.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         headerView.btnBack.setImage(UIImage(named: "ic_arrow_left_black"), for: .normal)
         
         headerView.btnRightBarOPtion.isHidden = true
     }
-
-    private let vDividerLine = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(hex: "#E7E7E7")
-        return view
-    }()
-    
   
     init(contract: Contract){
         self.autoPayDetailTblV = AutoPayContractAndMethodTblV(contract: contract)
@@ -42,22 +41,33 @@ class AutoPayRegisterVC: BaseControllerWithHeaderVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupFooter()
+        setActionForApplyButton()
         
     }
     
     private func setupUI(){
-        view.addSubview(autoPayDetailTblV)
+        view.addSubViews(autoPayDetailTblV,vFooter)
         
         NSLayoutConstraint.activate([
             autoPayDetailTblV.topAnchor.constraint(equalTo: headerView.bottomAnchor),
             autoPayDetailTblV.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             autoPayDetailTblV.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             autoPayDetailTblV.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            self.vFooter.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.vFooter.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.vFooter.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            self.vFooter.heightAnchor.constraint(equalTo: self.vFooter.widthAnchor, multiplier: 80/414)
         ])
     }
     
+    
+    //TODO: Handle when select payment method
     func toggleSelectMethodSheet() {
-//        autoPayDetailTblV.setDataAutoPayDetailModel(autoPayDetailModel: AutopayDetailModel)
+        
+        //TODO: Set data and update UI for showing selected payment method
+        autoPayDetailTblV.setDataAutoPayDetailModel(autoPayDetailModel: SampleData.sampleAutoPayModel)
     }
 }
 
@@ -78,6 +88,7 @@ extension AutoPayRegisterVC: UITableViewDataSource, UITableViewDelegate {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AutoPaymentMethodTblCell.cellId, for: indexPath) as? AutoPaymentMethodTblCell else {
                 return UITableViewCell()
             }
+            self.indexPathOfPayMethodCell = indexPath
             cell.configure(from: nil)
             cell.didTapSelectMethod = toggleSelectMethodSheet
             
@@ -89,12 +100,27 @@ extension AutoPayRegisterVC: UITableViewDataSource, UITableViewDelegate {
         }
         
     }
+}
+extension AutoPayRegisterVC{
+    func setupFooter(){
+        vFooter.btnPrimary.isEnabled = true
+        vFooter.btnPrimary.setTitle("Xác nhận", for: .normal)
+        vFooter.btnSecondary.titleLabel?.font = UIFont.systemFont(ofSize: 16,weight: .medium)
+        vFooter.hideSecondaryButton()
+        vFooter.btnSecondary.setTitle("oke", for: .normal)
+        
+    }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        
-//    }
+    private func setActionForApplyButton() {
+        vFooter.btnPrimary.addTarget(self, action: #selector(didPressApplyButton), for: .touchUpInside)
+    }
     
-    
+    @objc func didPressApplyButton() {
+        let checkFeeVoucherModel = ResultManager.getResultPaymentData()
+        let resultVC = ResultVC(modelPayment: checkFeeVoucherModel!, typeResult: .SUCCESS)
+        
+        navigationController?.pushViewController(resultVC, animated: true)
+    }
 }
 
 

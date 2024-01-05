@@ -24,6 +24,8 @@ struct CheckFreeVoucherModel {
     var evcAmount: Int
     var orderId: String
     
+    
+    
     init(json : JSON){
         self.amountText = json["amountText"].stringValue
         self.amount = json["amount"].intValue

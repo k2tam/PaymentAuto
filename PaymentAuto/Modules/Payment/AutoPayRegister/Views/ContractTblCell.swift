@@ -35,6 +35,13 @@ class ContractTblCell: UITableViewCell {
         addSubViews(contractTitleRow)
     }
     
+    override func prepareForReuse() {
+        stackContractBlock.arrangedSubviews.forEach { subView in
+            subView.removeFromSuperview()
+        }
+    }
+    
+    
     public func configure(from contract: Contract){
         setupUI(contract: contract)
         

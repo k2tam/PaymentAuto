@@ -12,8 +12,8 @@ struct ResultSampleData {
     static let sampleData = """
         {
           "data": {
-            "amountText": "360.000đ",
-            "amount": 360,
+            "amountText": "",
+            "amount": 0,
             "content": {
               "title": "Thanh toán thành công",
               "body": "Gặp sự cố trong quá trình thanh toán, quý khách vui lòng thử lại. Xin cảm ơn!"

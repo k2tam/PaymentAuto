@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ResultVC: UIViewController {
+class ResultVC: BaseControllerWithHeaderVC {
     private let tblViewResult =  UITableView()
     
     lazy var scrollView : VList = VList(
@@ -15,7 +15,21 @@ class ResultVC: UIViewController {
         containerContentInset: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     
     )
-    private var vm: ResultVM?
+    
+    override func setupHeader(){
+        super.setupHeader()
+        headerView.lblTitle.text = "Đăng ký trả tự động"
+        headerView.lblTitle.textColor = UIColor(hex: "#333333")
+        headerView.lblTitle.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        headerView.btnBack.setImage(UIImage(named: "ic_arrow_left_black"), for: .normal)
+        
+        headerView.btnRightBarOPtion.isHidden = true
+    }
+    private let vFooter: HiBottomViewWithTwoButton = {
+        let v = HiBottomViewWithTwoButton()
+        v.translatesAutoresizingMaskIntoConstraints = false
+        return v
+    }()
     
     private let resultView: ResultView
     
@@ -32,6 +46,8 @@ class ResultVC: UIViewController {
             typeResult: typeResult
         )
         super.init(nibName: nil, bundle: nil)
+        self.setupFooter(typeResult: .FAILURE)
+        
         
     }
     
@@ -60,7 +76,8 @@ class ResultVC: UIViewController {
     
     
     private func setupUI() {
-        view.addSubview(scrollView)
+        view.addSubViews(scrollView,vFooter)
+        
         scrollView.vStack.spacing = 16
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addItemView(items: [resultView])
@@ -72,7 +89,52 @@ class ResultVC: UIViewController {
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
+            self.vFooter.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.vFooter.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.vFooter.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            self.vFooter.heightAnchor.constraint(equalTo: self.vFooter.widthAnchor, multiplier: 80/414)
         ])
+        
+    }
+}
+
+extension ResultVC {
+    func setupFooter(typeResult: PaymentResultStatus){
+        
+        vFooter.btnPrimary.isEnabled = true
+        vFooter.btnSecondary.titleLabel?.font = UIFont.systemFont(ofSize: 16,weight: .medium)
+        vFooter.hideSecondaryButton()
+        vFooter.btnSecondary.setTitle("oke", for: .normal)
+        
+        var titleBtnPrimary: String = ""
+        switch typeResult {
+        case .SUCCESS:
+            titleBtnPrimary = "Xem chi tiết"
+            vFooter.btnPrimary.addTarget(self, action: #selector(didTapMoreDetail), for: .touchUpInside)
+
+        case .SUCCESSAUTOPAY:
+            titleBtnPrimary = "Xem chi tiết"
+            vFooter.btnPrimary.addTarget(self, action: #selector(didTapFailBtn), for: .touchUpInside)
+        case .FAILURE:
+            titleBtnPrimary = "Thử lại"
+            vFooter.btnPrimary.addTarget(self, action: #selector(didTapMoreDetail), for: .touchUpInside)
+        case .SUCCESS_WITHOUT_PAYMENTMETHOD:
+            titleBtnPrimary = "Xem chi tiết"
+            vFooter.btnPrimary.addTarget(self, action: #selector(didTapMoreDetail), for: .touchUpInside)
+
+        }
+        
+        vFooter.btnPrimary.setTitle(titleBtnPrimary, for: .normal)
+
+    }
+    
+    @objc func didTapFailBtn() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
+    //TODO: Handle tap "Xem chi tiết khi đăng ký thành công"
+    @objc func didTapMoreDetail() {
         
     }
 }

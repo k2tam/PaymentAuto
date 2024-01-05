@@ -9,7 +9,7 @@ import UIKit
 
 class AutoPayHomeVC: BaseControllerWithHeaderVC {
     
-    let contract = Contract(contactNo: "HDN1230017", presenterName: "Nguyễn Quỳnh Anh", address: "345 Cau Giay, Quan Hoa, Cau Giay, Ha Noi")
+    let contract = SampleData.sampleContractModel
     private var autoPayDetailModel: AutopayDetailModel? = nil
     
     private let paymentBar: UIView = AutoPayBar()
@@ -21,22 +21,13 @@ class AutoPayHomeVC: BaseControllerWithHeaderVC {
         return v
     }()
 
-    
-    
+
     init(autoPayDetailModel: AutopayDetailModel?) {
         self.autoPayDetailModel = autoPayDetailModel
         self.autoPayDetailTblV = AutoPayContractAndMethodTblV(contract: self.contract)
 
         super.init(nibName: nil, bundle: nil)
-    
-
-//
-//        let autoPayDetailModel = AutopayDetailModel()
-//        
-//        autoPayDetailTblV.setData(contract: contract, autoPayDetailModel: autoPayDetailModel)
-        
         configure(autoPayDetailModel: self.autoPayDetailModel)
-
     }
     
     private func configure(autoPayDetailModel: AutopayDetailModel?){
@@ -75,11 +66,7 @@ class AutoPayHomeVC: BaseControllerWithHeaderVC {
         headerView.btnBack.setImage(UIImage(named: "ic_arrow_left_black"), for: .normal)
         
         headerView.btnRightBarOPtion.isHidden = true
-
-        
-        
-       
-        
+    
     }
     
     private func setupFooter(){
