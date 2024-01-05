@@ -2,12 +2,122 @@
 //  Extension+UIView.swift
 //  PaymentAuto
 //
-//  Created by TaiVC on 1/4/24.
+//  Created by TaiVC on 1/5/24.
 //
 
 import UIKit
+extension Int {
+    var toUIColor: UIColor {
+        let r = (CGFloat)(((self & 0xFF0000) >> 16)) / 255.0
+        let g = (CGFloat)(((self & 0x00FF00) >> 08)) / 255.0
+        let b = (CGFloat)(((self & 0x0000FF) >> 00)) / 255.0
+        return UIColor(red: r, green: g, blue: b, alpha: 1.0)
+    }
+   
+    var formatnumber: String {
+            let formater = NumberFormatter()
+            formater.groupingSeparator = "."
+            formater.numberStyle = .decimal
+            return formater.string(from: NSNumber(value: self))!
+    }
+    
+    var positiveInt : Int{
+        return self < 0 ? 0 : self
+    }
+}
+
+extension UIColor {
+    func hexStringToUIColor (hex:String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
+        }
+        
+        if ((cString.count) != 6) {
+            return UIColor.gray
+        }
+        
+        var rgbValue:UInt32 = 0
+        Scanner(string: cString).scanHexInt32(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    convenience init(hex: String, alpha: CGFloat = 1.0) {
+        var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+        hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
+
+        var rgb: UInt64 = 0
+
+        Scanner(string: hexSanitized).scanHexInt64(&rgb)
+
+        let red = CGFloat((rgb & 0xFF0000) >> 16) / 255.0
+        let green = CGFloat((rgb & 0x00FF00) >> 8) / 255.0
+        let blue = CGFloat(rgb & 0x0000FF) / 255.0
+
+        self.init(red: red, green: green, blue: blue, alpha: alpha)
+    }
+}
+extension NSMutableAttributedString {
+    
+    @discardableResult func customeFont(_ text: String, color: UIColor, stypeFont: UIFont) -> NSMutableAttributedString {
+        
+        let attrs : [NSAttributedString.Key: Any] = [.font : stypeFont,.foregroundColor : color]
+        let attrString = NSMutableAttributedString(string: text, attributes: attrs)
+        
+        append(attrString)
+        
+        return self
+        
+    }
+    
+    func replaceWithAttribute(fromStr: String, toStr: String , withAttribute: [NSAttributedString.Key : Any]?)  {
+        let toString = NSAttributedString(string: toStr, attributes: withAttribute)
+        // Get range of text to replace
+        if let feeRange = self.string.range(of: fromStr) {
+            let nsRange = NSRange(feeRange, in: self.string)
+            self.replaceCharacters(in: nsRange, with: toString)
+        }
+     
+    }
+    
+}
 
 extension UIView {
+    enum TransitionAnimationPopupType{
+        case ShowBottomTop
+        case HideBottomTop
+
+        case HideLeftToRight
+        case ShowRightToLeft
+        
+    }
+    func showHidePopup(background : UIView, animationType : TransitionAnimationPopupType, timeDuration : Double = 0.3){
+        UIView.animate(withDuration: timeDuration, delay: 0,
+                       options: [.curveEaseInOut, .transitionCrossDissolve], animations: {
+            switch animationType {
+            case .ShowBottomTop:
+                self.frame.origin.y -= self.bounds.height
+                background.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
+            case .HideBottomTop:
+                self.frame.origin.y += self.bounds.height
+                background.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+            case .ShowRightToLeft:
+                self.frame.origin.x -= self.bounds.width
+                background.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.5)
+            case .HideLeftToRight: // Hidden not word in iOS >= 15...
+                self.frame.origin.x += self.bounds.width //UIScreen.main.bounds.width
+                background.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+                
+            }
+        })
+    }
+
     func addLine(fromPoint start: CGPoint, toPoint end: CGPoint, color : UIColor) {
         let line = CAShapeLayer()
         let linePath = UIBezierPath()
@@ -19,6 +129,22 @@ extension UIView {
         line.lineJoin = CAShapeLayerLineJoin.round
         self.layer.addSublayer(line)
     }
+    
+    func drawLine(startX: Int, toEndingX endX: Int, startingY startY: Int, toEndingY endY: Int, ofColor lineColor: UIColor, widthOfLine lineWidth: CGFloat, inView view: UIView) {
+        
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: startX, y: startY))
+        path.addLine(to: CGPoint(x: endX, y: endY))
+
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.path = path.cgPath
+        shapeLayer.strokeColor = lineColor.cgColor
+        shapeLayer.lineWidth = lineWidth
+
+        view.layer.addSublayer(shapeLayer)
+
+    }
+    
     func roundCorners(corners: UIRectCorner, radius: CGFloat) {
         if #available(iOS 11.0, *) {
             self.clipsToBounds = true
@@ -275,6 +401,8 @@ extension UIView {
         let rootView = UIApplication.shared.keyWindow?.rootViewController?.view
         return self.superview?.convert(self.frame, to: rootView)
     }
+    
+   
 }
 
 enum VerticalLocation: String {
@@ -380,76 +508,76 @@ class UIKeyValueView: UIView {
         
     }
 
-//    func fillData(data: ECounterKeyValueButtonLineView? = nil, keyTitle: String, value: NSMutableAttributedString , cellType : DetailItemType, isShowBtnEdit : Bool = false, isShowLineView : Bool = true, actionButton: (()->())? = nil) {
-//        if isShowBtnEdit{
-//            btnEdit.isHidden = false
-//        }else{
-//            btnEdit.isHidden = true
-//        }
-//        if isShowLineView{
-//            self.lineView.isHidden = false
-//        }else{
-//            self.lineView.isHidden = true
-//        }
-//        self.btnEditCallback = actionButton
-//        self.lblKey.text = keyTitle
-//        self.lblValue.numberOfLines = 2
-//        self.lblValue.attributedText = value
-//        switch cellType {
-//        case .icon:
-//            break
-//        case .econtract:
-//            lblValue.textColor = UIColor(red: 0.188, green: 0.843, blue: 0.545, alpha: 1)
-//            lblValue.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-//            self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(actionEdit)))
-//        case .contractNo:
-//            lblValue.textColor = UIColor(red: 1, green: 0.495, blue: 0.029, alpha: 1)
-//            lblValue.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-//        case .text:
-//            lblValue.textColor = UIColor(hex: "#333333")
-//            lblValue.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-//        case .upgradePackage:
-//            self.lblValue.numberOfLines = 3
-//            let mTable = NSMutableAttributedString(string: "")
-//            let attributes: [NSAttributedString.Key: Any] = [
-//                .foregroundColor: UIColor(red: 1, green: 0.495, blue: 0.029, alpha: 1),
-//                .font: UIFont(name: AppFontName.semiBold, size: 16) ?? UIFont()
-//            ]
-//            let attributes2: [NSAttributedString.Key: Any] = [
-//                .foregroundColor: UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1),
-//                .font: UIFont(name: AppFontName.medium, size: 14) ?? UIFont()
-//            ]
-//            let attributes3: [NSAttributedString.Key: Any] = [
-//                .foregroundColor: UIColor(red: 0.463, green: 0.463, blue: 0.463, alpha: 1),
-//                .font: UIFont(name: AppFontName.medium, size: 12) ?? UIFont()
-//            ]
-//            guard let data = data else { return }
-//
-//            mTable.append(NSMutableAttributedString(string: data.value, attributes:attributes))
-//            mTable.append(NSMutableAttributedString(string: !data.typePackage.isEmpty ? "\n\(data.typePackage)" : data.typePackage, attributes:attributes2))
-//            mTable.append(NSMutableAttributedString(string: !data.descriptionPackage.isEmpty ? "\n\(data.descriptionPackage)" : data.descriptionPackage, attributes:attributes3))
-//            self.lblValue.attributedText = mTable
-//        case .changePM:
-//            self.lblValue.numberOfLines = 3
-//            let mTable = NSMutableAttributedString(string: "")
-//            let attributes: [NSAttributedString.Key: Any] = [
-//                .foregroundColor: UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1),
-//                .font: UIFont(name: AppFontName.medium, size: 14) ?? UIFont()
-//            ]
-//            
-//            let attributes3: [NSAttributedString.Key: Any] = [
-//                .foregroundColor: UIColor(red: 0.463, green: 0.463, blue: 0.463, alpha: 1),
-//                .font: UIFont(name: AppFontName.medium, size: 14) ?? UIFont()
-//            ]
-//            guard let data = data else { return }
-//
-//            mTable.append(NSMutableAttributedString(string: data.value, attributes:attributes))
-//            mTable.append(NSMutableAttributedString(string: !data.descriptionPackage.isEmpty ? "\n\(data.descriptionPackage)" : data.descriptionPackage, attributes:attributes3))
-//            self.lblValue.attributedText = mTable
-//        }
-//
-//        
-//    }
+    func fillData(data: ECounterKeyValueButtonLineView? = nil, keyTitle: String, value: NSMutableAttributedString , cellType : DetailItemType, isShowBtnEdit : Bool = false, isShowLineView : Bool = true, actionButton: (()->())? = nil) {
+        if isShowBtnEdit{
+            btnEdit.isHidden = false
+        }else{
+            btnEdit.isHidden = true
+        }
+        if isShowLineView{
+            self.lineView.isHidden = false
+        }else{
+            self.lineView.isHidden = true
+        }
+        self.btnEditCallback = actionButton
+        self.lblKey.text = keyTitle
+        self.lblValue.numberOfLines = 2
+        self.lblValue.attributedText = value
+        switch cellType {
+        case .icon:
+            break
+        case .econtract:
+            lblValue.textColor = UIColor(red: 0.188, green: 0.843, blue: 0.545, alpha: 1)
+            lblValue.font = UIFont.systemFont(ofSize: 14, weight: .medium)
+            self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(actionEdit)))
+        case .contractNo:
+            lblValue.textColor = UIColor(red: 1, green: 0.495, blue: 0.029, alpha: 1)
+            lblValue.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        case .text:
+            lblValue.textColor = UIColor(hex: "#333333")
+            lblValue.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        case .upgradePackage:
+            self.lblValue.numberOfLines = 3
+            let mTable = NSMutableAttributedString(string: "")
+            let attributes: [NSAttributedString.Key: Any] = [
+                .foregroundColor: UIColor(red: 1, green: 0.495, blue: 0.029, alpha: 1),
+                .font: UIFont.systemFont(ofSize: 16, weight: .semibold)
+            ]
+            let attributes2: [NSAttributedString.Key: Any] = [
+                .foregroundColor: UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1),
+                .font: UIFont.systemFont(ofSize: 14, weight: .medium)
+            ]
+            let attributes3: [NSAttributedString.Key: Any] = [
+                .foregroundColor: UIColor(red: 0.463, green: 0.463, blue: 0.463, alpha: 1),
+                .font: UIFont.systemFont(ofSize: 12, weight: .medium)
+            ]
+            guard let data = data else { return }
+
+            mTable.append(NSMutableAttributedString(string: data.value, attributes:attributes))
+            mTable.append(NSMutableAttributedString(string: !data.typePackage.isEmpty ? "\n\(data.typePackage)" : data.typePackage, attributes:attributes2))
+            mTable.append(NSMutableAttributedString(string: !data.descriptionPackage.isEmpty ? "\n\(data.descriptionPackage)" : data.descriptionPackage, attributes:attributes3))
+            self.lblValue.attributedText = mTable
+        case .changePM:
+            self.lblValue.numberOfLines = 3
+            let mTable = NSMutableAttributedString(string: "")
+            let attributes: [NSAttributedString.Key: Any] = [
+                .foregroundColor: UIColor(red: 0.157, green: 0.157, blue: 0.157, alpha: 1),
+                .font: UIFont.systemFont(ofSize: 14, weight: .medium)
+            ]
+            
+            let attributes3: [NSAttributedString.Key: Any] = [
+                .foregroundColor: UIColor(red: 0.463, green: 0.463, blue: 0.463, alpha: 1),
+                .font:  UIFont.systemFont(ofSize: 14, weight: .medium)
+            ]
+            guard let data = data else { return }
+
+            mTable.append(NSMutableAttributedString(string: data.value, attributes:attributes))
+            mTable.append(NSMutableAttributedString(string: !data.descriptionPackage.isEmpty ? "\n\(data.descriptionPackage)" : data.descriptionPackage, attributes:attributes3))
+            self.lblValue.attributedText = mTable
+        }
+
+        
+    }
     @objc func actionEdit(){
         btnEditCallback?()
     }
@@ -457,7 +585,7 @@ class UIKeyValueView: UIView {
         self.backgroundColor = .white
         btnEdit.setTitleColor(UIColor(red: 0.27, green: 0.394, blue: 0.929, alpha: 1), for: .normal)
         btnEdit.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .medium)
-        btnEdit.setTitle("", for: .normal)
+        btnEdit.setTitle(Localizable.shared.localizedString(key: "edit"), for: .normal)
         btnEdit.addTarget(self, action: #selector(actionEdit), for: .touchUpInside)
 
         btnEdit.isHidden = true
@@ -553,4 +681,14 @@ extension UIView {
       }
     
 }
+
+enum DetailItemType: String{
+    case econtract
+    case contractNo
+    case text
+    case icon
+    case upgradePackage
+    case changePM
+}
+
 

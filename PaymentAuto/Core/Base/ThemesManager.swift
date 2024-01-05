@@ -2,7 +2,7 @@
 //  ThemesManager.swift
 //  PaymentAuto
 //
-//  Created by TaiVC on 1/4/24.
+//  Created by TaiVC on 1/5/24.
 //
 
 import Foundation
@@ -42,7 +42,7 @@ public enum ThemesColor{
     public func getPrimaryColor()->UIColor{
         switch self {
         case .ThemesVer7:
-            return UIColor(red: 0.235, green: 0.306, blue: 0.427, alpha: 1) //#3C4E6D
+            return UIColor(hex: "#4564ED") // #4564ED
       
         }
     }
@@ -71,7 +71,7 @@ public enum ThemesColor{
     public func getHeaderBackgroundColor()->UIColor{
         switch self {
         case .ThemesVer7:
-            return UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+            return UIColor(red: 1, green: 1, blue: 1, alpha: 1) // #FFFFFF
         }
     }
     public func getBackgroundColor()->UIColor{

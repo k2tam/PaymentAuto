@@ -150,7 +150,7 @@ class SelectPaymentMethodButton: UIView {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
         self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor(hex: "##D1D1D1")?.cgColor
+        self.layer.borderColor = UIColor(hex: "##D1D1D1").cgColor
         self.layer.cornerRadius = 8
         setupUI()
     }

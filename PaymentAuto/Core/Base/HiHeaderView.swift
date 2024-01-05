@@ -2,9 +2,11 @@
 //  HiHeaderView.swift
 //  PaymentAuto
 //
-//  Created by TaiVC on 1/4/24.
+//  Created by TaiVC on 1/5/24.
 //
 
+
+import Foundation
 import UIKit
 open class HiBottomView: UIView {
     public lazy var topLine : UIView = {
@@ -74,7 +76,7 @@ open class HiBottomView: UIView {
     public lazy var btnBack = ButtonLeftBar()
     public lazy var btnRightBarOPtion = ButtonRightBarOption()
     public lazy var lblTitle = LabelTitle()
-    lazy var btnHistory = ButtonHistory()
+    public lazy var btnHistory = ButtonHistory()
     private lazy var stackView : UIStackView = {
         let v = UIStackView()
         v.axis = .horizontal
@@ -102,16 +104,22 @@ open class HiBottomView: UIView {
         setupUI()
         
     }
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        guard let titleButton = btnRightBarOPtion.titleLabel?.text , titleButton != "" else {return}
+        btnRightBarOPtion.titleEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
+        btnRightBarOPtion.imageEdgeInsets = UIEdgeInsets(top: 0, left: -14, bottom: 0, right: 14)
+    }
     func setupUI(){
-//        set default data for btnRightBarOption
-//        btnRightBarOPtion.data = [
-//            DropViewModel(imv: "back-to-home-black", title: Localizable.shared.localizedString(key: "back_to_home"), clickHandler: {[weak self] in
-//                guard let self = self else {return}
-//                if let navigationController = self.window?.rootViewController as? UINavigationController {
-//                    navigationController.popToRootViewController(animated: true)
-//                }
-//            })
-//        ]
+        //set default data for btnRightBarOption
+        btnRightBarOPtion.data = [
+            DropViewModel(imv: "back-to-home-black", title: Localizable.shared.localizedString(key: "back_to_home"), clickHandler: {[weak self] in
+                guard let self = self else {return}
+                if let navigationController = self.window?.rootViewController as? UINavigationController {
+                    navigationController.popToRootViewController(animated: true)
+                }
+            })
+        ]
         btnBack.translatesAutoresizingMaskIntoConstraints = false
         btnBack.setImage(UIImage(named: "ic_arrow_left_black"), for: .normal)
         btnBack.tintColor = UIColor(hex: "#333333", alpha: 1)
@@ -146,7 +154,7 @@ open class HiBottomView: UIView {
             btnBack.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             btnBack.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
-            btnRightBarOPtion.widthAnchor.constraint(equalTo: btnBack.widthAnchor),
+            btnRightBarOPtion.widthAnchor.constraint(greaterThanOrEqualTo: btnBack.widthAnchor),
             btnHistory.widthAnchor.constraint(equalToConstant: 32),
             
             stackView.heightAnchor.constraint(equalTo: btnBack.heightAnchor),
@@ -174,9 +182,9 @@ open class HiBottomView: UIView {
     }
     
     /// Default right button will show drop down
-//    public func setupRightButton(dropDownList: [DropViewModel]) {
-//        btnRightBarOPtion.data = dropDownList
-//    }
+    public func setupRightButton(dropDownList: [DropViewModel]) {
+        btnRightBarOPtion.data = dropDownList
+    }
     
     /// Setup custom image and custom click action of button right
     /// - Parameters:
@@ -196,13 +204,13 @@ open class HiBottomView: UIView {
 }
 
 public class ButtonRightBarOption: UIButton {
-//    public var data : [DropViewModel]? = [
-//        DropViewModel(
-//            imv: "back-to-home-black",
-//            title: Localizable.shared.localizedString(key: "back_to_home"),
-//            clickHandler: {}
-//        )
-//    ]
+    public var data : [DropViewModel]? = [
+        DropViewModel(
+            imv: "back-to-home-black",
+            title: Localizable.shared.localizedString(key: "back_to_home"),
+            clickHandler: {}
+        )
+    ]
     public var callback : (()-> Void)?
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -224,12 +232,36 @@ public class ButtonRightBarOption: UIButton {
         if callback != nil{
             callback?()
         }else{
-//            guard let data = data else { return }
+            guard let data = data else { return }
 //            DropDownManager.shared.showDropView(sender: self, data: data, onSelect: {_ in})
         }
     }
     
     
+}
+public struct DropViewModel {
+    var imv:String? = nil
+    var title:String?
+    var titleColor: UIColor = .black
+    var typeImage: TypeImage = .ic
+    var clickHandler: () -> Void
+    
+    public init(
+        imv: String? = nil,
+        title: String?,
+        titleColor: UIColor = .black,
+        typeImage: TypeImage = .ic,
+        clickHandler: @escaping () -> Void
+    ) {
+        self.titleColor = titleColor
+        self.imv = imv
+        self.title = title
+        self.typeImage = typeImage
+        self.clickHandler = clickHandler
+    }
+}
+public enum TypeImage{
+    case url, ic
 }
 public class ButtonLeftBar: UIButton {
     public var callback : (()-> Void)?
@@ -277,11 +309,4 @@ public class LabelTitle : UILabel{
         self.numberOfLines = 2
     }
 }
-struct DropViewModel {
-    var imv:String?
-    var title:String?
-    var typeImage: TypeImage = .ic
-}
-enum TypeImage{
-    case url, ic
-}
+

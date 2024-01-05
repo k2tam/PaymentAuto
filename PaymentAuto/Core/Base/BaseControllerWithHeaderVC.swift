@@ -1,11 +1,14 @@
 //
-//  FileBaseControllerWithHeaderVC.swift
+//  BaseControllerWithHeaderVC.swift
 //  PaymentAuto
 //
-//  Created by TaiVC on 1/4/24.
+//  Created by TaiVC on 1/5/24.
 //
 
+import Foundation
+
 import UIKit
+
 class BaseControllerWithHeaderVC: BaseViewController {
     var backgroundHeader : UIView = {
         let v = UIView()
@@ -47,10 +50,13 @@ class BaseControllerWithHeaderVC: BaseViewController {
         ])
     }
     internal func setupHeader(){
+        headerView.btnBack.callback = {[weak self] in
+            self?.navigationController?.popViewController(animated: true)
+        }
         headerHeight = self.view.bounds.width*WIDTH_HEIGHT_RATIO
         setConstraintHeader()
         self.additionalSafeAreaInsets = UIEdgeInsets(top: headerHeight, left: 0, bottom: 0, right: 0)
-        self.backgroundHeader.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        self.backgroundHeader.backgroundColor = MyGlobal.shared().myThemes.getHeaderBackgroundColor()
         self.headerView.backgroundColor = .clear
     }
 }

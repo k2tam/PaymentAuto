@@ -22,7 +22,7 @@ class AutoPayBar: UIView {
        let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor(hex: "#DDE4FC")?.cgColor
+        view.layer.borderColor = UIColor(hex: "#DDE4FC").cgColor
         view.layer.cornerRadius = 22 / 2
         return view
     }()
