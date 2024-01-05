@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AutoPaymentBar: UIView {
+class AutoPayBar: UIView {
     private let lbPaymentBarTitle: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false

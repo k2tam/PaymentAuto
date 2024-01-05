@@ -22,11 +22,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        let rootVC = CancelAutomaticPayment()
 
 //        let checkFeeVoucherModel = ResultManager.getResultPaymentData()
-            
-        
-        
 //        let rootVC = ResultVC(modelPayment: checkFeeVoucherModel!, typeResult: .SUCCESS)
-        let rootVC = PaymentAutoRegisterVC()
+        
+//        let rootVC = PaymentAutoRegisterVC()
+        let rootVC = AutoPayHomeVC()
         
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = rootVC

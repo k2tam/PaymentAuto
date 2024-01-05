@@ -14,6 +14,10 @@ class AutoPaymentMethodTblCell: UITableViewCell {
     private let dividerLine = DividerLine()
     private let btnSelectBtnMethod = SelectPaymentMethodButton()
     
+    var isSelectMethod: Bool = false
+    
+    var didTapSelectMethod: (() -> Void)?
+    
     private let lbSelectMethod: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
@@ -31,12 +35,32 @@ class AutoPaymentMethodTblCell: UITableViewCell {
         return view
     }()
     
+    public func configure(from autoPayDetailModel: AutopayDetailModel?){
+        btnSelectBtnMethod.autoPayDetailModel = autoPayDetailModel
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.backgroundColor = UIColor(hex: "#F5F5F5")
         
         setupUI()
+        setupActionForBtnSelectBtnMethod()
     }
+    
+    
+    
+    private func setupActionForBtnSelectBtnMethod() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(btnSelectBtnMethodPressed))
+        btnSelectBtnMethod.addGestureRecognizer(tapGesture)
+    }
+    
+    // Function to be triggered when the button is tapped
+        @objc private func btnSelectBtnMethodPressed() {
+            // Your code to be executed when the button is tapped
+            didTapSelectMethod?()
+        }
+    
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -75,7 +99,26 @@ class AutoPaymentMethodTblCell: UITableViewCell {
     
 }
 
+
+
 class SelectPaymentMethodButton: UIView {
+    
+    let sampleModel = AutopayDetailModel()
+    
+    var autoPayDetailModel: AutopayDetailModel? = nil {
+        didSet {
+            self.configure(from: autoPayDetailModel)
+        }
+    }
+    
+    private let stackMethodBtnContent: UIStackView = {
+       let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .horizontal
+        stack.spacing = 10
+        return stack
+    }()
+    
     private let imgVMethodIcon: UIImageView = {
         let imgV = UIImageView()
         imgV.translatesAutoresizingMaskIntoConstraints = false
@@ -84,20 +127,11 @@ class SelectPaymentMethodButton: UIView {
         return imgV
     }()
     
-    private let lbMethodName: UILabel = {
+    private let lbMethod: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        lb.text = "Techcombank"
-        return lb
-    }()
-    
-    private let lbMethodNum: UILabel = {
-       let lb = UILabel()
-        lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = UIFont.systemFont(ofSize: 16)
-        lb.textColor = UIColor(hex: "#888888")
-        lb.text = "[*3456]"
+        lb.text = "Chọn phương thức"
         return lb
     }()
     
@@ -107,6 +141,10 @@ class SelectPaymentMethodButton: UIView {
         imgV.image = UIImage(named: "ic_arrow_down")
         return imgV
     }()
+    
+    public func configureLabelMethod(from: AutopayDetailModel) {
+        
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -121,30 +159,71 @@ class SelectPaymentMethodButton: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func configure(from autoPayDetailModel: AutopayDetailModel?){
+        if let autoPayDetailModel = self.autoPayDetailModel {
+            //Case already have payment method
+            imgVMethodIcon.isHidden = false
+            imgVMethodIcon.image = UIImage(named: "ic_techcombank")
+            
+            if let cardBrand  = autoPayDetailModel.cardBrand, let cardNumber = autoPayDetailModel.cardNumber {
+
+                let fullMethodLBText = "\(cardBrand) \(cardNumber)"
+                let attributedString = NSMutableAttributedString(string: fullMethodLBText)
+
+                
+                let rangeCardBrand = (fullMethodLBText as NSString).range(of: cardBrand)
+                let rangeCardNumber = (fullMethodLBText as NSString).range(of: cardNumber)
+
+                
+                //Font for card brand
+                let boldFont = UIFont.systemFont(ofSize: 16, weight: .medium)
+                attributedString.addAttributes([NSAttributedString.Key.font: boldFont,], range: rangeCardBrand)
+                
+                //Font for card number
+                let secondaryTextColor = UIColor(hex: "#888888")
+                attributedString.addAttributes([NSAttributedString.Key.font: boldFont, NSAttributedString.Key.foregroundColor: secondaryTextColor], range: rangeCardNumber)
+                
+                
+                lbMethod.attributedText = attributedString
+
+                
+            }
+          
+            
+        }else{
+            //Case not have payment method
+            imgVMethodIcon.isHidden = true
+            lbMethod.text = "Chọn phương thức"
+        }
+    }
+    
     private func setupUI() {
-        self.addSubViews(imgVMethodIcon,lbMethodName,lbMethodNum,imgVArrowIcon)
+        configure(from: self.autoPayDetailModel)
         
-        lbMethodName.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        self.addSubViews(stackMethodBtnContent,imgVArrowIcon)
+        
+        let arrangedSubViews = [imgVMethodIcon, lbMethod]
+        
+        for subView in arrangedSubViews {
+            stackMethodBtnContent.addArrangedSubview(subView)
+        }
         
         NSLayoutConstraint.activate([
-            imgVMethodIcon.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-    
             imgVMethodIcon.widthAnchor.constraint(equalToConstant: 32),
             imgVMethodIcon.heightAnchor.constraint(equalTo: imgVMethodIcon.widthAnchor),
-            imgVMethodIcon.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12),
             
-            lbMethodName.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            lbMethodName.heightAnchor.constraint(equalToConstant: 22),
-            lbMethodName.leadingAnchor.constraint(equalTo: imgVMethodIcon.trailingAnchor, constant: 10),
+            lbMethod.heightAnchor.constraint(equalToConstant: 22),
             
-            lbMethodNum.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            lbMethodNum.heightAnchor.constraint(equalToConstant: 22),
-            lbMethodNum.leadingAnchor.constraint(equalTo: lbMethodName.trailingAnchor, constant: 1),
-            lbMethodNum.trailingAnchor.constraint(equalTo: imgVArrowIcon.leadingAnchor, constant: -1),
+            stackMethodBtnContent.widthAnchor.constraint(equalToConstant: 150),
+            stackMethodBtnContent.heightAnchor.constraint(equalToConstant: 32),
+            stackMethodBtnContent.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            stackMethodBtnContent.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12),
+            stackMethodBtnContent.trailingAnchor.constraint(equalTo: imgVArrowIcon.leadingAnchor, constant: -1),
+            
             
             imgVArrowIcon.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             imgVArrowIcon.widthAnchor.constraint(equalToConstant: 24),
-            imgVArrowIcon.heightAnchor.constraint(equalTo: imgVArrowIcon.widthAnchor),
+            imgVArrowIcon.heightAnchor.constraint(equalToConstant: 24),
             imgVArrowIcon.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -12),
         ])
     }

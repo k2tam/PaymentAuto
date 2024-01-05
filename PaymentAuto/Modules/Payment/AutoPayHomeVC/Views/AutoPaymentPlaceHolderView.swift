@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AutoPaymentPlaceHolderView: UIView {
+class AutoPayPlaceHolderView: UIView {
 
     let imgVPlaceHolder: UIImageView = {
        let imgV = UIImageView()

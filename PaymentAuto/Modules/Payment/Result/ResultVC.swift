@@ -10,11 +10,16 @@ import UIKit
 class ResultVC: UIViewController {
     private let tblViewResult =  UITableView()
     
-    lazy var scrollView : VList = VList(scrollviewContentInset: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16),
-                                        containerContentInset: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+    lazy var scrollView : VList = VList(
+        scrollviewContentInset: UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16),
+        containerContentInset: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    
+    )
     private var vm: ResultVM?
     
     private let resultView: ResultView
+    
+    //TODO: Handle result add on view button here
     private let resultAddOnView = ResultAddOnView {
         print("Press")
     }
@@ -26,9 +31,6 @@ class ResultVC: UIViewController {
             content: modelPayment.content,
             typeResult: typeResult
         )
-        
-        
-        
         super.init(nibName: nil, bundle: nil)
         
     }
@@ -61,7 +63,7 @@ class ResultVC: UIViewController {
         view.addSubview(scrollView)
         scrollView.vStack.spacing = 16
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addItemView(items: [resultView,resultAddOnView])
+        scrollView.addItemView(items: [resultView])
         
         
         NSLayoutConstraint.activate([

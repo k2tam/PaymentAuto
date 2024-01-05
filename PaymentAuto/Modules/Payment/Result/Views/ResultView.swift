@@ -70,7 +70,13 @@ class ResultView: UIView {
             imgVResultIcon.image = UIImage(resource: .icTick)
         }
         
-        lbPrice.text = amountText
+        if amountText != "" {
+            lbPrice.text = amountText
+        }
+        else{
+            lbPrice.isHidden = true
+        }
+        
         lbTitle.text = content.title
         lbDesc.text = content.body
         

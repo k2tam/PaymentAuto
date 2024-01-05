@@ -17,18 +17,15 @@ struct PaymentMethod {
     
 }
 
-enum tblItems {
-    case contractInfo(Contract)
-    case payment
-}
+
 
 class PaymentAutoRegisterVM {
     
     let sampleContract = Contract(contactNo: "HDN123001", presenterName: "Nguyễn Quỳnh Anh", address: "345 Cau Giay, Quan Hoa, Cau Giay, Ha Noi")
     
-    let tblItems: [tblItems] = [
+    let tblItems: [eTblItems] = [
         .contractInfo(Contract(contactNo: "HDN123001", presenterName: "Nguyễn Quỳnh Anh", address: "345 Cau Giay, Quan Hoa, Cau Giay, Ha Noi")),
-        .payment
+        .payment(AutopayDetailModel())
     ]
     
     
