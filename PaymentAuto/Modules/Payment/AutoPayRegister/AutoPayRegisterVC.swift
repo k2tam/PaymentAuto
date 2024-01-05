@@ -7,20 +7,21 @@
 
 import UIKit
 
-class PaymentAutoRegisterVC: UIViewController {
-    
-    private let tblView: UITableView = {
-        let tblView = UITableView()
-        tblView.translatesAutoresizingMaskIntoConstraints = false
-        tblView.backgroundColor = UIColor(hex: "#F5F5F5")
-        tblView.separatorStyle = .none
-        tblView.register(ContractTblCell.self, forCellReuseIdentifier: ContractTblCell.cellId)
-        tblView.register(AutoPaymentMethodTblCell.self, forCellReuseIdentifier: AutoPaymentMethodTblCell.cellId)
-        return tblView
-    }()
-    
+class AutoPayRegisterVC: BaseControllerWithHeaderVC {
     private var vm = PaymentAutoRegisterVM()
     
+    private let autoPayDetailTblV: AutoPayContractAndMethodTblV
+
+    override func setupHeader(){
+        super.setupHeader()
+        headerView.lblTitle.text = "Trả tự động"
+        headerView.lblTitle.textColor = UIColor(hex: "#333333")
+        headerView.lblTitle.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        headerView.btnBack.setImage(UIImage(named: "ic_arrow_left_black"), for: .normal)
+        
+        headerView.btnRightBarOPtion.isHidden = true
+    }
+
     private let vDividerLine = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -29,35 +30,38 @@ class PaymentAutoRegisterVC: UIViewController {
     }()
     
   
+    init(contract: Contract){
+        self.autoPayDetailTblV = AutoPayContractAndMethodTblV(contract: contract)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTblView()
         setupUI()
         
     }
     
-    private func setupTblView() {
-        tblView.delegate = self
-        tblView.dataSource = self
-    }
-    
     private func setupUI(){
-        view.addSubview(tblView)
+        view.addSubview(autoPayDetailTblV)
         
         NSLayoutConstraint.activate([
-            tblView.topAnchor.constraint(equalTo: view.topAnchor),
-            tblView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tblView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tblView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            autoPayDetailTblV.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+            autoPayDetailTblV.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            autoPayDetailTblV.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            autoPayDetailTblV.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
     }
     
     func toggleSelectMethodSheet() {
-        print("Select method sheet on")
+//        autoPayDetailTblV.setDataAutoPayDetailModel(autoPayDetailModel: AutopayDetailModel)
     }
 }
 
-extension PaymentAutoRegisterVC: UITableViewDataSource, UITableViewDelegate {
+extension AutoPayRegisterVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return vm.tblItems.count
     }

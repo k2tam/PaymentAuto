@@ -25,10 +25,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        let rootVC = ResultVC(modelPayment: checkFeeVoucherModel!, typeResult: .SUCCESS)
         
 //        let rootVC = PaymentAutoRegisterVC()
-        let rootVC = AutoPayHomeVC()
+        let rootVC = AutoPayHomeVC(autoPayDetailModel: nil)
+        
         
         let window = UIWindow(windowScene: windowScene)
-        window.rootViewController = rootVC
+        let navigationController = UINavigationController(rootViewController: rootVC)
+
+        window.rootViewController = navigationController
+        navigationController.isNavigationBarHidden = true
+
         window.makeKeyAndVisible()
         
         self.window = window

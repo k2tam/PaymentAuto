@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol AutoPayPlaceHolderViewDelegate: AnyObject {
+    func didPressRegister()
+}
+
 class AutoPayPlaceHolderView: UIView {
+    
+    weak var delegate: AutoPayPlaceHolderViewDelegate?
 
     let imgVPlaceHolder: UIImageView = {
        let imgV = UIImageView()
@@ -45,12 +51,17 @@ class AutoPayPlaceHolderView: UIView {
         return btn
     }()
     
-    
+       @objc private func registerPressed() {
+           
+           delegate?.didPressRegister()
+
+       }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.translatesAutoresizingMaskIntoConstraints = false
         setupUI()
+        btnRegister.addTarget(self, action: #selector(registerPressed), for: .touchUpInside)
     }
     
 
@@ -82,5 +93,7 @@ class AutoPayPlaceHolderView: UIView {
             
         ])
     }
+    
+    
     
 }

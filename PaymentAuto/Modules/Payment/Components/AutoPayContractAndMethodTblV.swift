@@ -8,14 +8,15 @@
 import UIKit
 enum eTblItems {
     case contractInfo(Contract)
-    case payment(AutopayDetailModel)
+    case payment(AutopayDetailModel?)
 }
 
 class AutoPayContractAndMethodTblV: UIView {
     
-    var tblItems: [eTblItems] = []
+    private var contractModel: Contract
+    private var tblItems: [eTblItems] = []
 
-    private let tblView: UITableView = {
+    private var tblView: UITableView = {
         let tblView = UITableView()
         tblView.translatesAutoresizingMaskIntoConstraints = false
         tblView.backgroundColor = UIColor(hex: "#F5F5F5")
@@ -25,23 +26,18 @@ class AutoPayContractAndMethodTblV: UIView {
         return tblView
     }()
     
-//    init(contract: Contract,autoPayDetailModel: AutopayDetailModel){
-//        self.tblItems = [.contractInfo(contract),.payment(autoPayDetailModel)]
-//        super.init(frame: .zero)
-//        self.translatesAutoresizingMaskIntoConstraints = false
-//        setupTbl()
-//        setupUI()
-//    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(contract: Contract,autoPayDetailModel: AutopayDetailModel? = nil){
+        self.contractModel = contract
+        self.tblItems = [.contractInfo(contract),.payment(nil)]
+        super.init(frame: .zero)
         self.translatesAutoresizingMaskIntoConstraints = false
         setupTbl()
         setupUI()
     }
     
-    public func configure(contract: Contract,autoPayDetailModel: AutopayDetailModel){
-        self.tblItems = [.contractInfo(contract),.payment(autoPayDetailModel)]
+    
+    public func setDataAutoPayDetailModel(autoPayDetailModel: AutopayDetailModel){
+        self.tblItems = [.contractInfo(self.contractModel),.payment(autoPayDetailModel)]
         self.tblView.reloadData()
     }
     
@@ -86,18 +82,17 @@ extension AutoPayContractAndMethodTblV: UITableViewDataSource, UITableViewDelega
             }
             cell.configure(from: contract)
             return cell
-        case .payment:
+        case .payment(let autoPaymentModel):
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AutoPaymentMethodTblCell.cellId, for: indexPath) as? AutoPaymentMethodTblCell else {
                 return UITableViewCell()
             }
-            cell.configure(from: nil)
+            cell.configure(from: autoPaymentModel)
             cell.didTapSelectMethod = toggleSelectMethodSheet
             
             
             return cell
             
-        default:
-            return UITableViewCell()
+        
         }
         
     }
